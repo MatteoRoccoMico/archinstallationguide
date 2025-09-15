@@ -74,7 +74,7 @@ mkswap *path of linux swap partition*
 
 mkfs.fat -F 32 *path of EFI system partition*
 
-mkfs.ext4 *<or chosen filesystem> path to linux root partition*
+mkfs.ext4 *(or chosen filesystem) path to linux root partition*
 
 
 
