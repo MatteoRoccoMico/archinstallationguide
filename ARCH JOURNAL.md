@@ -119,7 +119,7 @@ pacman -Sy
 
 **non volatile installation of essential software for the system**
 
-pacstrap -K /mnt base linux linux-firmware base-devel linux-headers git micro grub efibootmgr sudo iwd mesa
+pacstrap -K /mnt base linux linux-firmware base-devel linux-headers git micro grub efibootmgr sudo iwd mesa screengrab lximage-qt
 
 
 
