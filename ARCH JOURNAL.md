@@ -10,6 +10,10 @@
 
 
 
+**check if system is efi (and if it is 64 bit)**
+
+cat /sys/firmware/efi/fw_platform_size *it should return 64 or 32*
+
 
 
 **temporary keyboard layout change**
@@ -74,7 +78,7 @@ mkswap *path of linux swap partition*
 
 mkfs.fat -F 32 *path of EFI system partition*
 
-mkfs.ext4 *(or chosen filesystem) path to linux root partition*
+mkfs.ext4 *<or chosen filesystem> path to linux root partition*
 
 
 
@@ -115,7 +119,7 @@ pacman -Sy
 
 **non volatile installation of essential software for the system**
 
-pacstrap -K /mnt base linux linux-firmware base-devel linux-headers git micro grub efibootmgr sudo iwd
+pacstrap -K /mnt base linux linux-firmware base-devel linux-headers git micro grub efibootmgr sudo iwd mesa
 
 
 
@@ -293,6 +297,20 @@ makepkg -si
 
 
 
+**installation of app package store**
+
+yay -S snapd
+
+sudo systemctl enable --now snapd.socket
+
+sudo systemctl enable --now snapd.apparmor.service
+
+sudo ln -s /var/lib/snapd/snap /snap
+
+reboot
+
+
+
 **set non volatile environment variables**
 
 micro /etc/environment
@@ -413,13 +431,13 @@ sudo systemctl enable sddm
 
 *if yay aur helper is installed, sugar candy is a good theme*
 
-yay -S sddm-sugar-dark
+yay -S sddm-eucalyptus-drop
 
 micro /usr/lib/sddm/sddm.conf.d/default.conf
 
-*on* [Theme] *set* Current=sugar-dark
+*on* [Theme] *set* Current=sddm-eucalyptus-drop
 
-micro /usr/share/sdd,/themes/sugar-dark/theme.conf *to modify theme*
+micro /usr/share/sdd,/themes/eucalyptus-drop/theme.conf *to modify theme*
 
 
 
@@ -571,3 +589,28 @@ micro /usr/share/applications/obsidian.desktop
 *change* Exec=/usr/bin/obsidian %U *in* Exec=env OBSIDIAN_USE_WAYLAND=1 obsidian -enable-features=UseOzonePlatform -ozone-platform=wayland -enable-wayland-ime %U
 
 
+
+**custom wofi entries**
+
+micro ~/.local/share/applications/youtube.desktop
+
+[Desktop Entry]
+Name=YouTube (new tab)
+Comment=Open YouTube in a new Firefox tab
+Exec=firefox --new-tab https://www.youtube.com
+Icon=firefox
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+
+update-desktop-database ~/.local/share/applications
+
+
+
+**update pacman mirrorlist**
+
+sudo pacman -S reflector
+
+sudo reflector --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
+sudo pacman -Syyu
