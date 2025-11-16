@@ -1,3 +1,17 @@
+TOEDIT TOSAVE
+//restore pacman/libicuuc ICU
+DOTS/FILES:
+/etc/tlp.conf
+.local/share/applications/tetrs_tui.desktop
+.config/
+    waybar
+    fish
+    kitty (including fastfetch)
+    hyprland
+/usr/share/applications/obsidian.desktop
+
+//never pacman Sy or S, always pacman Syu 
+
 # ARCH JOURNAL:
 
 ***not including specific drivers (nvidia, intel, amd, etc)***
@@ -309,6 +323,8 @@ sudo ln -s /var/lib/snapd/snap /snap
 
 reboot
 
+BETTER USE FLATPAK OR FLATPAK GUI (kde, gnome etc)
+
 
 
 **set non volatile environment variables**
@@ -545,6 +561,7 @@ micro .config/mpv/mpv.conf
 **installation of energy saving options**
 
 sudo pacman -S python-gobject power-profiles-daemon
+OR BETTER TLP
 
 
 
@@ -587,6 +604,7 @@ sudo pacman -S obsidian
 micro /usr/share/applications/obsidian.desktop
 
 *change* Exec=/usr/bin/obsidian %U *in* Exec=env OBSIDIAN_USE_WAYLAND=1 obsidian -enable-features=UseOzonePlatform -ozone-platform=wayland -enable-wayland-ime %U
+ALSO ADD NO GPU FLAG
 
 
 
